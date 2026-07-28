@@ -1,4 +1,5 @@
 import numpy as np
+import time
 from dingo import PolytopeSampler
 from scipy.linalg import eigh
 
@@ -35,15 +36,21 @@ def _ess_min(samples):
 
 def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', n_samples=None, verbose=True):
     """Compute quality metrics for a rounded polytope {x : A x <= b}."""
+    
     d = A.shape[1]
     if n_samples is None:
-        n_samples = max(200, 1000)
+        n_samples = max(20,40000)
 
     burn_in  = int(5 * np.sqrt(d))
     thinning = max(1, burn_in)
 
+    burn_in  = 0
+    thinning = 1
+
     if verbose:
         print(f"     [quality] sampling {n_samples} points in R^{d} (burn={burn_in}, thin={thinning}) ...")
+
+    start_sampling_time = time.time()
     samples = PolytopeSampler.sample_from_polytope_no_multiphase(
         A, b,
         method=walk_method,
@@ -51,6 +58,7 @@ def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', 
         burn_in=burn_in,
         thinning=thinning
     )
+    sampling_elapsed_time = time.time() - start_sampling_time
 
     # Condition number T, how hard,big was the rounding
     if T_matrix is not None:
@@ -66,7 +74,8 @@ def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', 
     cov = np.cov(X_centered, rowvar=False)
     
     eigvals = eigh(cov, eigvals_only=True) 
-    cov_ratio = eigvals[-1] / eigvals[0] if eigvals[0] > 1e-14 else float('inf')
+    cov_ratio = eigvals[-1] / eigvals[0] if eigvals[0] > 1e-30 else float('inf')
+    min_eigenvalue = eigvals[0]
     
     # Trace
     cov_trace = np.trace(cov)
@@ -77,7 +86,7 @@ def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', 
     diag_max = np.max(diag_elements)
     diag_mean = np.mean(diag_elements)
     diag_std = np.std(diag_elements)
-    
+  
     # Distance to Identity Matrix
     I = np.eye(d)
     cov_diff = cov - I
@@ -90,6 +99,7 @@ def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', 
     if non_diagonals.size > 0:
         non_diag_min = np.min(non_diagonals)
         non_diag_max = np.max(non_diagonals)
+        non_diag_mean = np.mean(non_diagonals)
         non_diag_std = np.std(non_diagonals)
     else:
         non_diag_min = non_diag_max = non_diag_std = 0.0
@@ -97,7 +107,7 @@ def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', 
     # Minimum ESS 
     ess = _ess_min(samples) 
 
-    return {
+    metrics = {
         "T_cond": t_cond,
         "cov_ratio": cov_ratio,
         "ess_min": ess,
@@ -110,5 +120,10 @@ def evaluate_rounding_quality(A, b, T_matrix=None, walk_method='billiard_walk', 
         "dist_to_I_mean": dist_to_identity_mean,
         "non_diag_min": non_diag_min,
         "non_diag_max": non_diag_max,
-        "non_diag_std": non_diag_std
+        "non_diag_mean": non_diag_mean,
+        "non_diag_std": non_diag_std,
+        "sampling_time": sampling_elapsed_time,
+        "min_eigenvalue": min_eigenvalue,
     }
+
+    return metrics, X
