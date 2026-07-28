@@ -40,8 +40,7 @@ def run_benchmark():
     if not os.path.exists(bench_file):
         with open(bench_file, "w") as f:
             f.write("Model,Method,Dimension,Time_sec\n")
-
-    # Define the parameter space for the synthetic benchmarks
+            
     dims_to_test = [500, 1000, 1500, 2000, 2500, 3000]
     skinny_percentages = [0.10, 0.50]
     
@@ -76,7 +75,7 @@ def run_benchmark():
                     
                     try:
                         if method_name == "polyround":
-                            # Pre-processing setup is excluded from the timer
+                            
                             pr_polytope = PRPolytope(pd.DataFrame(A), pd.Series(b))
                             settings = PolyRoundSettings()
                             
