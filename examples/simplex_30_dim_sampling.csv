@@ -1,0 +1,13 @@
+Polytope, Dimension, Method                  , Time_Sec, Points, ESS , Mixing_Ratio, Max_PSRF, KS_Stat, KS_P_Value
+Simplex ,        30, AcceleratedBilliardWalk ,   0.1774,  17500, 3144,       5.5662,   1.0028, 0.0207 , 0.4349
+Simplex ,        30, BCDHRWalk               ,   0.3030,  32256, 4180,     463.0048,   1.0009, 0.0150 , 0.6757
+Simplex ,        30, BRDHRWalk               ,   4.6173, 116640, 3983,    1757.0675,   1.0016, 0.0202 , 0.3822
+Simplex ,        30, BallWalk                ,   5.1275, 186624, 3009,    3721.3161,   1.0008, 0.0189 , 0.6500
+Simplex ,        30, BilliardShakeAndBakeWalk,   0.9995,   6125, 4851,      75.7576,   1.0019, 1.0000 , 0.0000
+Simplex ,        30, BilliardWalk            ,   0.1645,  33600, 3241,      10.3672,   1.0010, 0.0289 , 0.1180
+Simplex ,        30, CDHRWalk                ,   0.2573,  42000, 5573,     452.1802,   1.0009, 0.0144 , 0.5623
+Simplex ,        30, GaussianBallWalk        ,   4.6951, 164025, 3039,    3238.4008,   1.0016, -1.0000, -1.0000
+Simplex ,        30, GaussianCDHRWalk        ,   0.1921,  25200, 3000,     504.0000,   1.0022, -1.0000, -1.0000
+Simplex ,        30, RDHRWalk                ,   4.3185, 111132, 3909,    1705.7866,   1.0010, 0.0132 , 0.8750
+Simplex ,        30, ShakeAndBakeWalk        ,   8.1084, 127575, 8236,     929.3953,   1.0007, 1.0000 , 0.0000
+Simplex ,        30, SparseBilliardWalk      ,   0.7402,  16875, 3201,       5.2718,   1.0017, 0.0284 , 0.1293

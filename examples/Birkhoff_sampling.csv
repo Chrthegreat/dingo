@@ -1,0 +1,13 @@
+Polytope, Dimension, Method                  , Time_Sec, Points, ESS , Mixing_Ratio, Max_PSRF, KS_Stat, KS_P_Value
+Birkhoff,        81, AcceleratedBilliardWalk ,   0.1350,   5162,  290,      17.8000,   1.0089, 0.0544 , 0.7487
+Birkhoff,        81, BCDHRWalk               ,   0.2914,   5162,  140,    5973.1714,   1.0294, 0.0622 , 0.9358
+Birkhoff,        81, BRDHRWalk               ,   1.8928,   5162,   43,   19447.5349,   1.0399, 0.1762 , 0.4630
+Birkhoff,        81, BallWalk                ,   2.8231,   5162,    7,  119463.4286,   1.4353, 0.0000 , 1.0000
+Birkhoff,        81, BilliardShakeAndBakeWalk,   6.6074,   5162, 2022,     413.5727,   1.0025, 1.0000 , 0.0000
+Birkhoff,        81, BilliardWalk            ,   0.1055,   5162,   61,      84.6230,   1.0783, 0.1154 , 0.7782
+Birkhoff,        81, CDHRWalk                ,   0.2000,   5162,  163,    5130.3313,   1.0271, 0.0750 , 0.7159
+Birkhoff,        81, GaussianBallWalk        ,   2.8713,   5162,    8,  104530.5000,   1.3622, -1.0000, -1.0000
+Birkhoff,        81, GaussianCDHRWalk        ,   0.2237,   5162,  161,    5194.0621,   1.0248, -1.0000, -1.0000
+Birkhoff,        81, RDHRWalk                ,   1.8348,   5162,   32,   26132.6250,   1.1191, 0.2318 , 0.2814
+Birkhoff,        81, ShakeAndBakeWalk        ,   3.4791,   5162,   72,   11614.5000,   1.0514, 1.0000 , 0.0000
+Birkhoff,        81, SparseBilliardWalk      ,   3.8155,   5162, 1512,       3.4140,   1.0027, 0.0533 , 0.1022
